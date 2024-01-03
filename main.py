@@ -1,6 +1,6 @@
 import random
-
-import pygame.sprite
+import os
+import sys
 
 
 class Player:
@@ -25,14 +25,14 @@ class Player:
             self.Properties["Lucky"] += 1
             self.Properties["Charisma"] += 3
         # Rouge
-        if int(self.p_class) == 2:
+        elif int(self.p_class) == 2:
             self.Properties["Power"] -= 1
             self.Properties["Defend"] += 1
             self.Properties["Speed"] += 3
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] -= 2
         # Knight
-        if int(self.p_class) == 3:
+        elif int(self.p_class) == 3:
             self.Properties["Power"] += 2
             self.Properties["Defend"] += 3
             self.Properties["Speed"] -= 1
@@ -40,56 +40,56 @@ class Player:
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 4:
+        elif int(self.p_class) == 4:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 5:
+        elif int(self.p_class) == 5:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 6:
+        elif int(self.p_class) == 6:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 7:
+        elif int(self.p_class) == 7:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 8:
+        elif int(self.p_class) == 8:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 9:
+        elif int(self.p_class) == 9:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 10:
+        elif int(self.p_class) == 10:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
         # Paladin
-        if int(self.p_class) == 11:
+        elif int(self.p_class) == 11:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
             self.Properties["Speed"] -= 1
@@ -99,19 +99,41 @@ class Player:
     def update(self):
         self.classProperties()
 
-def main():
+class ClassesPropertiesPrinter:
+    def __init__(self, class_property):
+        global uclassB
+        self.cl = class_property
+        if int(self.cl) == 1:
+            print('Paladin')
+            print('...')
+            yorn = input('> ')
+            if yorn == 'yes':
+                uclassB = '1'
+                print(uclassB)
+        
+
+def setup():
+    global player, uclassB
+    os.system('cls')
+    # - USERNAME ----------------------------------------------------------------*
     uname = input("Add meg a neved! ")
+    os.system('cls')
+    # - CAST --------------------------------------------------------------------*
     print("Add meg a kasztodat!")
     casts = ["Ember", "Elf", "Ork", "Goblin", "Dwarf", "Dragonborn"]
     for c in range(len(casts)):
         print(c+1, ". ", casts[c])
     ucast = input("> ")
-    classes = ["Paladin", "Rogue", "Ranger", "Knight", "Monk", "Warrior", "Bard", "Barbarian", "Druid", "Mage", "Assasin"]
+    os.system('cls')
+    # - CLASS -------------------------------------------------------------------*
+    print('add meg az osztályodat')
+    classes = ["Paladin", "Rogue", "Ranger", "Knight", "Warrior", "Bard", "Barbarian", "Druid", "Mage"]
     for i, c in enumerate(classes):
         print(i + 1, '.', c)
-    job = input("Add meg az osztályodat! ")
-    player = Player(uname, ucast, job)
+    uclassA = input("> ")
+    os.system('cls')
+    ClassesPropertiesPrinter(uclassA)
+    player = Player(uname, ucast, uclassB)
+    print(player.Properties)
 
-
-
-main()
+setup()
