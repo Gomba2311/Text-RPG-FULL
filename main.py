@@ -100,16 +100,46 @@ class Player:
         self.classProperties()
 
 class ClassesPropertiesPrinter:
-    def __init__(self, class_property):
+    def __init__(self):
         global uclassB
-        self.cl = class_property
+        self.cl = classer()
         if int(self.cl) == 1:
-            print('Paladin')
-            print('...')
+            print('###Paladin###')
+            print('Power: +1')
+            print('Defend: -2')
+            print('Speed: -1')
+            print('Lucky: +2')
+            print('Magic Power: Nothing')
+            print('Charisma: +1')
+            print('#############')
             yorn = input('> ')
             if yorn == 'yes':
                 uclassB = '1'
                 print(uclassB)
+            elif yorn == 'no':
+                ClassesPropertiesPrinter()
+            else:
+                print('Invalid! Please answer with yes or no!')
+                while yorn != 'yes' or 'no':
+                    yorn = input('> ')
+                    if yorn == 'yes':
+                        uclassB = '1'
+                    elif yorn == 'no':
+                        ClassesPropertiesPrinter()
+    def returning(self):
+        return uclassB
+
+
+
+def classer():
+    os.system('cls')
+    print('add meg az osztályodat')
+    classes = ["Paladin", "Rogue", "Ranger", "Knight", "Warrior", "Bard", "Barbarian", "Druid", "Mage"]
+    for i, c in enumerate(classes):
+        print(i + 1, '.', c)
+    uclassA = input("> ")
+    os.system('cls')
+    return uclassA
         
 
 def setup():
@@ -124,16 +154,9 @@ def setup():
     for c in range(len(casts)):
         print(c+1, ". ", casts[c])
     ucast = input("> ")
-    os.system('cls')
+    os.system('cls')    
     # - CLASS -------------------------------------------------------------------*
-    print('add meg az osztályodat')
-    classes = ["Paladin", "Rogue", "Ranger", "Knight", "Warrior", "Bard", "Barbarian", "Druid", "Mage"]
-    for i, c in enumerate(classes):
-        print(i + 1, '.', c)
-    uclassA = input("> ")
-    os.system('cls')
-    ClassesPropertiesPrinter(uclassA)
-    player = Player(uname, ucast, uclassB)
+    player = Player(uname, ucast, ClassesPropertiesPrinter().returning())
     print(player.Properties)
 
 setup()
