@@ -112,19 +112,21 @@ class ClassesPropertiesPrinter:
             print('Magic Power: Nothing')
             print('Charisma: +1')
             print('#############')
-            yorn = input('> ')
-            if yorn == 'yes':
+            YesOrNo = input('> ')
+            if YesOrNo == 'yes':
                 uclassB = '1'
                 print(uclassB)
-            elif yorn == 'no':
+            elif YesOrNo == 'no':
                 ClassesPropertiesPrinter()
             else:
                 print('Invalid! Please answer with yes or no!')
-                while yorn != 'yes' or 'no':
-                    yorn = input('> ')
-                    if yorn == 'yes':
+                NotYesOrNo = True
+                while NotYesOrNo:
+                    YesOrNo = input('> ')
+                    if YesOrNo == 'yes':
                         uclassB = '1'
-                    elif yorn == 'no':
+                        NotYesOrNo
+                    elif YesOrNo == 'no':
                         ClassesPropertiesPrinter()
     def returning(self):
         return uclassB
