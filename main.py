@@ -2,36 +2,35 @@ import random
 import os
 import sys
 
+class PlayerProperty:
+    def __init__(self, value):
+        self.value = value
+    def get_value(self):
+        return self.value  
 
 class Player:
     def __init__(self, name, cast, class_p):
         self.name = name
         self.cast = cast
         self.p_class = class_p
-        self.Properties = {
-            'Power': random.randint(8, 18),
-            'Defend': random.randint(8, 18),
-            'Speed': random.randint(8, 18),
-            'Lucky': random.randint(7, 12),
-            'Magic Power': random.randint(10, 30),
-            'Charisma': random.randint(7, 20),
-        }
+        self.Properties = {'Power': PlayerProperty(13).get_value(), 'Defend': PlayerProperty(12).get_value()}
+
+            
+
+            
     def classProperties(self):
         # Paladin
         if int(self.p_class) == 1:
-            self.Properties["Power"] += 1
-            self.Properties["Defend"] += 1
-            self.Properties["Speed"] -= 2
-            self.Properties["Lucky"] += 1
-            self.Properties["Charisma"] += 3
+            for p in self.Properties:
+                self.Properties[p] += 1
         # Rouge
         elif int(self.p_class) == 2:
             self.Properties["Power"] -= 1
             self.Properties["Defend"] += 1
             self.Properties["Speed"] += 3
             self.Properties["Lucky"] += 2
-            self.Properties["Charisma"] -= 2
-        # Knight
+            self.Properties["Charisma"] -= 1
+        # Ranger
         elif int(self.p_class) == 3:
             self.Properties["Power"] += 2
             self.Properties["Defend"] += 3
@@ -39,7 +38,7 @@ class Player:
 
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
-        # Paladin
+        # Knight
         elif int(self.p_class) == 4:
             self.Properties["Power"] += 1
             self.Properties["Defend"] -= 2
@@ -96,52 +95,8 @@ class Player:
             self.Properties["Lucky"] += 2
             self.Properties["Charisma"] += 1
 
-    def update(self):
+    def player_setup(self):
         self.classProperties()
-
-class ClassesPropertiesPrinter:
-    def __init__(self):
-        global uclassB
-        self.cl = classer()
-        if int(self.cl) == 1:
-            print('###Paladin###')
-            print('Power: +1')
-            print('Defend: -2')
-            print('Speed: -1')
-            print('Lucky: +2')
-            print('Magic Power: Nothing')
-            print('Charisma: +1')
-            print('#############')
-            YesOrNo = input('> ')
-            if YesOrNo == 'yes':
-                uclassB = '1'
-                print(uclassB)
-            elif YesOrNo == 'no':
-                ClassesPropertiesPrinter()
-            else:
-                print('Invalid! Please answer with yes or no!')
-                NotYesOrNo = True
-                while NotYesOrNo:
-                    YesOrNo = input('> ')
-                    if YesOrNo == 'yes':
-                        uclassB = '1'
-                        NotYesOrNo
-                    elif YesOrNo == 'no':
-                        ClassesPropertiesPrinter()
-    def returning(self):
-        return uclassB
-
-
-
-def classer():
-    os.system('cls')
-    print('add meg az osztályodat')
-    classes = ["Paladin", "Rogue", "Ranger", "Knight", "Warrior", "Bard", "Barbarian", "Druid", "Mage"]
-    for i, c in enumerate(classes):
-        print(i + 1, '.', c)
-    uclassA = input("> ")
-    os.system('cls')
-    return uclassA
         
 
 def setup():
@@ -158,7 +113,16 @@ def setup():
     ucast = input("> ")
     os.system('cls')    
     # - CLASS -------------------------------------------------------------------*
-    player = Player(uname, ucast, ClassesPropertiesPrinter().returning())
+    os.system('cls')
+    print('add meg az osztályodat')
+    classes = ["Paladin", "Rogue", "Ranger", "Knight", "Warrior", "Bard", "Barbarian", "Druid", "Mage"]
+    for i, c in enumerate(classes):
+        print(i + 1, '.', c)
+    uclass = input("> ")
+    os.system('cls')
+    player = Player(uname, ucast, uclass)
+    player.update()
     print(player.Properties)
+
 
 setup()
